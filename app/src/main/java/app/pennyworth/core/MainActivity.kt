@@ -11,7 +11,7 @@ import kotlinx.coroutines.runBlocking
 
 class MainActivity : AppCompatActivity() {
     companion object {
-        //Todo (1/2): Replace link token
+        //Todo (1/1): Replace link token
         const val PLAID_LINK_TOKEN = "link-sandbox-0e1b014c-b0e8-47e6-bece-e22e56f217c7"
     }
 
@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.openPlaidLinkButton).setOnClickListener { onClickOpenPlaidLinkButton() }
     }
 
-    private fun onClickOpenPlaidLinkButton() = runBlocking {
+    private fun onClickOpenPlaidLinkButton() {
         val linkTokenConfiguration = linkTokenConfiguration {
             token = PLAID_LINK_TOKEN
             logLevel = LinkLogLevel.VERBOSE
@@ -30,9 +30,6 @@ class MainActivity : AppCompatActivity() {
 
         val plaidHandler = Plaid.create(application, linkTokenConfiguration)
 
-        //Todo (2/2): Adjust delay and find that there is no significant difference
-        delay(10000)
-
-        plaidHandler.open(this@MainActivity)
+        plaidHandler.open(this)
     }
 }
